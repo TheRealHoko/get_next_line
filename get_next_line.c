@@ -6,17 +6,13 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:52:43 by jzeybel           #+#    #+#             */
-/*   Updated: 2020/12/22 16:24:13 by jzeybel          ###   ########.fr       */
+/*   Updated: 2020/12/22 21:25:45 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
 
-static int	get_line(char **buf, char **line)
+int	get_line(char **buf, char **line)
 {
 	if (*buf)
 	{
@@ -56,26 +52,4 @@ int	get_next_line(int fd, char **line)
 	if (!get_line(&buf, line))
 		return (-1);
 	return (0);
-}
-
-int main(int ac, char **av)
-{
-	int		fd;
-	int		ret;
-	int		i = 0;
-	char	*d;
-
-	if (ac == 1)
-		fd = 1;
-	else
-		fd = open(av[1], O_RDONLY);
-	while (i < BUFFER_SIZE)
-	{
-		ret = get_next_line(fd, &d);
-		printf("%d	%s	%zu\n", ret, d, ft_strlen(d));
-		i++;
-	}
-	free(d);
-	close(fd);
-	return 0;
 }
