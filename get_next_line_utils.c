@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:52:42 by jzeybel           #+#    #+#             */
-/*   Updated: 2020/12/22 16:20:25 by jzeybel          ###   ########.fr       */
+/*   Updated: 2020/12/22 22:08:14 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*ft_substr(char *s, size_t start, size_t len, int tofree)
 		i++;
 	}
 	new_s[i] = '\0';
-	if (tofree == 1)
+	if (tofree)
 		free(s);
 	return (new_s);
 }
