@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 # .github/workflows/norminette.yml
-name: norminette
+name: norminettev2
 
 # Controls when the action will run. 
 on:
@@ -21,14 +21,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: alexandregv/norminette-action@v2
-      with:
-        flags: '.'
-
-  norminette_v3_job:
-    runs-on: ubuntu-latest
-    name: norminette v3
-    steps:
-    - uses: actions/checkout@v2
-    - uses: alexandregv/norminette-action@v3
       with:
         flags: '.'
