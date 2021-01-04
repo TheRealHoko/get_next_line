@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:52:43 by jzeybel           #+#    #+#             */
-/*   Updated: 2020/12/22 21:30:22 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/04 14:41:15 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,27 @@ int	get_line(char **buf, char **line)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*buf;
+	static char	*buf[FD];
 	char		buffer[BUFFER_SIZE + 1];
 	int			ret;
 	int			chr;
 
 	if (!line || fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0)
 		return (-1);
-	while (((chr = ft_strchr(buf, '\n')) == -1)
+	while (((chr = ft_strchr(buf[fd], '\n')) == -1)
 			&& (ret = read(fd, buffer, BUFFER_SIZE)))
 	{
 		buffer[ret] = '\0';
-		if (!(buf = ft_strjoin(buf, buffer)))
+		if (!(buf[fd] = ft_strjoin(buf[fd], buffer)))
 			return (-1);
 	}
 	if (chr > -1)
 	{
-		*line = ft_substr(buf, 0, chr, 0);
-		buf = ft_substr(buf, chr + 1, ft_strlen(buf) - chr, 1);
+		*line = ft_substr(buf[fd], 0, chr, 0);
+		buf[fd] = ft_substr(buf[fd], chr + 1, ft_strlen(buf[fd]) - chr, 1);
 		return (1);
 	}
-	if (!get_line(&buf, line))
+	if (!get_line(&buf[fd], line))
 		return (-1);
 	return (0);
 }

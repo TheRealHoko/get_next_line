@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:52:42 by jzeybel           #+#    #+#             */
-/*   Updated: 2020/12/22 22:08:14 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/04 14:36:13 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,15 @@ char	*ft_substr(char *s, size_t start, size_t len, int tofree)
 
 	if (!s)
 		return (NULL);
-	if (start >= ft_strlen(s))
-		return (ft_strdup(""));
 	maxlen = start;
 	i = 0;
 	while (s[maxlen++] != '\0' && i < len)
 		i++;
-	if (!(new_s = malloc(sizeof(char) * (i + 1))))
+	if (!(new_s = malloc(sizeof(char) * (len + 1))))
 		return (NULL);
 	i = 0;
-	while (len-- && s[start])
-	{
-		new_s[i] = s[start++];
-		i++;
-	}
+	while (i < len && s[start])
+		new_s[i++] = s[start++];
 	new_s[i] = '\0';
 	if (tofree)
 		free(s);
@@ -69,21 +64,23 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*new_s;
 	int		i;
 	int		j;
+	size_t	len;
 
-	if (!s2)
-		return (NULL);
-	if (!(new_s = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1))))
-		return (NULL);
 	i = 0;
 	j = 0;
-	while (s1 && s1[i])
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	if (!s2)
+		return (NULL);
+	if (!(new_s = malloc(sizeof(char) * len)))
+		return (NULL);
+	while (s1 && s1[i] != '\0')
 	{
 		new_s[i] = s1[i];
 		i++;
 	}
 	while (s2[j] != '\0')
 	{
-		new_s[i + j] = s2[j];
+		new_s[j + i] = s2[j];
 		j++;
 	}
 	new_s[i + j] = '\0';

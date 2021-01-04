@@ -6,12 +6,16 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:58:51 by jzeybel           #+#    #+#             */
-/*   Updated: 2020/12/22 21:34:43 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/04 14:39:28 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
+
+# ifndef FD
+#  define FD 256
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
