@@ -6,13 +6,13 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:52:42 by jzeybel           #+#    #+#             */
-/*   Updated: 2021/01/04 14:36:13 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/04 15:03:34 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int		ft_strchr(char *s, int c)
+int	ft_strchr(char *s, int c)
 {
 	int	i;
 
@@ -48,7 +48,8 @@ char	*ft_substr(char *s, size_t start, size_t len, int tofree)
 	i = 0;
 	while (s[maxlen++] != '\0' && i < len)
 		i++;
-	if (!(new_s = malloc(sizeof(char) * (len + 1))))
+	new_s = malloc(sizeof(char) * (len + 1));
+	if (!new_s)
 		return (NULL);
 	i = 0;
 	while (i < len && s[start])
@@ -71,18 +72,13 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	if (!s2)
 		return (NULL);
-	if (!(new_s = malloc(sizeof(char) * len)))
+	new_s = malloc(sizeof(char) * len);
+	if (!new_s)
 		return (NULL);
 	while (s1 && s1[i] != '\0')
-	{
-		new_s[i] = s1[i];
-		i++;
-	}
+		new_s[i++] = s1[i];
 	while (s2[j] != '\0')
-	{
-		new_s[j + i] = s2[j];
-		j++;
-	}
+		new_s[j++ + i] = s2[j];
 	new_s[i + j] = '\0';
 	if (s1)
 		free(s1);
@@ -95,7 +91,8 @@ char	*ft_strdup(const char *s1)
 	size_t	len;
 
 	len = ft_strlen(s1);
-	if (!(s = malloc(sizeof(char) * (len + 1))))
+	s = malloc(sizeof(char) * (len + 1));
+	if (!s)
 		return (NULL);
 	while (len-- && (*s1 != '\0'))
 		*s++ = *s1++;

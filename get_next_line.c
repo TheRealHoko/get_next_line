@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:52:43 by jzeybel           #+#    #+#             */
-/*   Updated: 2021/01/04 13:12:31 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/04 15:02:24 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ int	get_next_line(int fd, char **line)
 
 	if (!line || fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0)
 		return (-1);
-	while (((chr = ft_strchr(buf[fd], '\n')) == -1)
-			&& (ret = read(fd, buffer, BUFFER_SIZE)))
+	chr = ft_strchr(buf[fd], '\n');
+	ret = read(fd, buffer, BUFFER_SIZE);
+	while ((chr == -1) && (ret))
 	{
 		buffer[ret] = '\0';
-		if (!(buf[fd] = ft_strjoin(buf[fd], buffer)))
+		buf[fd] = ft_strjoin(buf[fd], buffer);
+		if (!buf[fd])
 			return (-1);
 	}
 	if (chr > -1)
