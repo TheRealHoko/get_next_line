@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 18:52:42 by jzeybel           #+#    #+#             */
-/*   Updated: 2021/01/05 19:49:04 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/05 20:40:38 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	len;
 
 	i = 0;
-	j = 0;
+	j = -1;
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	if (!s2)
 		return (NULL);
@@ -80,11 +80,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		new_s[i] = s1[i];
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
+	while (s2[++j] != '\0')
 		new_s[j + i] = s2[j];
-		j++;
-	}
 	new_s[i + j] = '\0';
 	if (s1)
 		free(s1);
