@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:52:43 by jzeybel           #+#    #+#             */
-/*   Updated: 2021/01/04 15:02:24 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/05 17:33:40 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 int	get_line(char **buf, char **line)
 {
 	if (*buf)
-	{
 		*line = *buf;
-	}
 	else
 	{
-		*line = ft_strdup("");
+		*line = malloc(sizeof(char) * 1);
 		*line[0] = '\0';
 	}
 	*buf = NULL;
@@ -34,16 +32,18 @@ int	get_next_line(int fd, char **line)
 	int			ret;
 	int			chr;
 
+	ret = 1;
 	if (!line || fd < 0 || read(fd, 0, 0) || BUFFER_SIZE <= 0)
 		return (-1);
 	chr = ft_strchr(buf[fd], '\n');
-	ret = read(fd, buffer, BUFFER_SIZE);
 	while ((chr == -1) && (ret))
 	{
+		ret = read(fd, buffer, BUFFER_SIZE);
 		buffer[ret] = '\0';
 		buf[fd] = ft_strjoin(buf[fd], buffer);
 		if (!buf[fd])
 			return (-1);
+		chr = ft_strchr(buf[fd], '\n');
 	}
 	if (chr > -1)
 	{
