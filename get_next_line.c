@@ -6,7 +6,7 @@
 /*   By: jzeybel <jzeybel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 13:52:43 by jzeybel           #+#    #+#             */
-/*   Updated: 2021/01/05 20:27:16 by jzeybel          ###   ########.fr       */
+/*   Updated: 2021/01/06 16:11:22 by jzeybel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	get_line(char **buf, char **line)
 	else
 	{
 		*line = malloc(sizeof(char) * 1);
+		if (!*line)
+			return (0);
 		*line[0] = '\0';
 	}
 	*buf = NULL;
@@ -28,7 +30,11 @@ int	get_line(char **buf, char **line)
 int	retline(int chr, char **buf, char **line)
 {
 	*line = ft_substr(*buf, 0, chr, 0);
+	if (!*line)
+		return(0);
 	*buf = ft_substr(*buf, chr + 1, ft_strlen(*buf) - chr, 1);
+	if (!*buf)
+		return (0);
 	return (1);
 }
 
